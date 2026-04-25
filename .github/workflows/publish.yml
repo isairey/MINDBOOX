@@ -1,0 +1,28 @@
+name: Main Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Check License Lines
+      uses: kt3k/license_checker@v1.0.6
+    
+    - name: Build
+      run: dotnet build Mindbox.I18n.sln --configuration Release
+      
+    - name: Test
+      run: dotnet test Mindbox.I18n.sln --no-build --configuration Release
+
+    - name: Pack
+      run: dotnet pack Mindbox.I18n.sln -c Release -p:BuildNumber=${{ github.run_number }}
+
+    - name: Publish
+      run: dotnet nuget push **/*.nupkg -k ${{secrets.MINDBOX_NUGET_AUTH_TOKEN}} -s https://www.nuget.org/api/v2/package --skip-duplicate

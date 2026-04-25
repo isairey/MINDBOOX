@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFrameworks>netstandard2.0;net7.0</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageId>Mindbox.I18n.Abstractions</PackageId>
+    <RepositoryUrl>https://github.com/mindbox-moscow/Mindbox.I18n</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>Mindbox.I18n internationalization abstractions library</Description>
+    <Copyright>Copyright Mindbox 2022</Copyright>
+    <PackageTags>Mindbox, I18n, abstractions</PackageTags>
+    <NoPackageAnalysis>false</NoPackageAnalysis>
+    <PackageVersion>$(VersionMajor).0.0$(VersionTag)</PackageVersion>    
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,54 @@
+name: Pull Request
+
+on: pull_request
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+     
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+
+    - name: Check License Lines
+      uses: kt3k/license_checker@v1.0.6
+    
+    - name: Ensure Version Bump
+      uses: mindbox-moscow/github-actions/ensure-bump@master
+      with:
+        abstractionsPath: 'Mindbox.I18n.Abstractions'
+    
+    - name: Build
+      run: dotnet build Mindbox.I18n.sln --configuration Release
+      
+    - name: Test
+      run: dotnet test Mindbox.I18n.sln --no-build --configuration Release --collect:"XPlat Code Coverage" --logger trx --results-directory coverage
+
+    - name: ReportGenerator
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.1.9
+      with: 
+        reports: coverage/*/coverage.cobertura.xml
+        targetdir: coveragereport
+        reporttypes: 'Cobertura'
+        verbosity: 'verbose'
+        
+    - name: Code Coverage Summary Report
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with:
+        filename: coveragereport/*.xml
+        badge: true
+        format: 'markdown'
+        output: 'both'
+        fail_below_min: false
+        thresholds: '50 80'
+
+    - name: Add Coverage PR Comment
+      uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        recreate: true
+        path: code-coverage-results.md
+  

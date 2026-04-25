@@ -1,0 +1,10 @@
+{
+	"translationSource": {
+		"solutionFilePath": "../AnalyzersSandbox.sln",
+		"locale": "ru-RU"
+	},
+	"logging": {
+		"enabled": true,
+		"logPath": "Mindbox.I18n.Analyzers.log"
+	}
+}
