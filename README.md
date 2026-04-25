@@ -74,7 +74,7 @@ El sistema sigue una arquitectura limpia y escalable:
 
 ```bash id="xk12p9"
 # Clonar el repositorio
-git clone https://github.com/tu-usuario/mindbox-clone.git
+git clone https://github.com/isairey/MINDBOOX.git
 
 # Entrar al proyecto
 cd mindbox-clone
